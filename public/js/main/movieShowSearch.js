@@ -1,0 +1,180 @@
+function searchMovieOrShowByIdDB (id){
+
+	//http://www.omdbapi.com/?t=
+	//http://www.omdbapi.com/?i=    
+
+    $.ajax({
+	    method: 'GET',
+	    url: '/getMovieOrShow/'+id,
+	    dataType: 'json',	
+	    data:{},
+	    success: function(result){
+        	//Change data
+
+            if (Object.keys(result).length==0){              	
+            	//THERE IS NO DATA ON DB Search on API
+            	searchMovieOrShowByIdAPI(id);
+			    
+			}
+			else{
+				if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1 || window.location.href.indexOf("book")!= -1) {
+      	
+      				
+      				addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);
+	   			
+	   			}else{
+	   				
+	   				//save in home
+	   				//Change data THERE IS DATA 				
+			    	$(".searchThisMS > div#"+id+ "> img").attr("src", result[0]['image']).removeAttr("href");
+	        	}
+				
+			}
+        },
+	    error: function (error) {
+	       //console.log(error);
+	    }
+	});
+}
+
+
+function searchMovieOrShowByIdAPI(id){
+
+	//http://www.omdbapi.com/?t=
+	//http://www.omdbapi.com/?i=
+
+    $.ajax({
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type':'application/json'
+             },
+        method: "GET",
+        url: "http://www.omdbapi.com/?i=" + id + "&apikey=ea71ae3c" ,
+        dataType: 'jsonp',
+        success: function(result){
+        	
+        	//save detail
+        	if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1 || window.location.href.indexOf("book")!= -1) {
+      			
+      			addHTMLDetailMovieShow(result['title'], result['awards'], result['country'], result['director'],result['writer'],result['actors'],result['genre'],result['language'],result['plot'],result['image'],result['rated'],result['released'],result['runtime'],result['type'],result['imdbID']);
+
+   			}else{
+   				//save in home
+   				$(".searchThisMS > div#"+result['imdbID']+ "> img").attr("src", result['image']).removeAttr("href");
+        	}
+        	
+          	saveMovieOrShow(result['title'], result['awards'], result['country'], result['director'],result['writer'],result['actors'],result['genre'],result['language'],result['plot'],result['image'],result['rated'],result['released'],result['runtime'],result['type'],result['imdbID']);
+        },
+        error: function(error){
+        	//console.log(error);
+        }
+
+    });
+
+}
+            
+
+function saveMovieOrShow(Title,Awards,Country,Director,Writer,Actors,Genre,Language,Plot,Poster,Rated,Released,Runtime,Type,imdbID){
+
+	$.ajax({
+	    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+	    method: 'POST',
+	    url: '/saveMovieOrShow',
+	    dataType: 'json',
+	    data: {
+	        '_token': $('input[name=_token]').val(),
+	        'Title':Title,
+	        'Awards': Awards,
+			'Country': Country,
+			'Director': Director,
+			'Writer': Writer ,
+			'Actors': Actors,
+			'Genre': Genre,
+			'Language': Language,
+			'Plot': Plot,
+			'Poster': Poster,
+			'Rated': Rated,
+			'Released': Released ,
+			'Runtime': Runtime,
+			'Type': Type ,
+			'imdbID': imdbID
+	    },	
+
+	    error: function (error) {
+	       // console.log(error);
+	    }
+	});    
+
+}
+
+function addHTMLDetailMovieShow(Title,Awards,Country,Director,Writer,Actors,Genre,Language,Plot,Poster,Rated,Released,Runtime,Type,imdbID){
+
+	$('.title').text(Title);
+    $('.addContent').append('<b>Awards</b>: '+ Awards+"<br/>");
+	$('.addContent').append('<b>Country</b>: '+ Country+"<br/>");
+	$('.addContent').append('<b>Director</b>: '+ Director+"<br/>");
+	$('.addContent').append('<b>Writer</b>: '+ Writer +"<br/>");
+	$('.addContent').append('<b>Actors</b>: '+ Actors+"<br/>");
+	$('.addContent').append('<b>Genre</b>: '+ Genre+"<br/>");
+	$('.addContent').append('<b>Language</b>: '+ Language+"<br/>");
+	$('.addContent').append('<b>Plot</b>: '+ Plot+"<br/>");
+	$('.addContent').append('<b>Rated</b>: '+ Rated+"<br/>");
+	$('.addContent').append('<b>Released</b>: '+ Released +"<br/>");
+	$('.addContent').append('<b>Runtime</b>: '+ Runtime+"<br/>");
+	$("#photo").attr("src", Poster);
+	
+}
+
+
+
+function saveMovieUser (title,api_id,timemark,rating,status,fav){
+
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        method: 'POST',
+        url: '/saveMovieUser',
+        dataType: 'json',
+        data: {
+            '_token': $('input[name=_token]').val(),
+            'title':title,          
+            'api_id':api_id,          
+            'timemark': timemark,
+            'rating':rating,
+            'status': status,
+            'fav': fav,
+        },  
+
+        error: function (error) {
+            //console.log("saveBook");
+           // console.log(error);
+        }
+    }); 
+}
+
+
+
+function saveShowUser (title,api_id,timemark,season,episode,rating,status,fav){
+
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        method: 'POST',
+        url: '/saveShowUser',
+        dataType: 'json',
+        data: {
+            '_token': $('input[name=_token]').val(),
+            'title':title,          
+            'api_id':api_id,          
+            'timemark': timemark,
+            'episode': episode,
+            'season': season,
+            'rating':rating,
+            'status': status,
+            'fav': fav,
+        },  
+
+        error: function (error) {
+            //console.log("saveBook");
+           // console.log(error);
+        }
+    }); 
+}

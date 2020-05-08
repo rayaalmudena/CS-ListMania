@@ -1,0 +1,16 @@
+*{font-family: Arimo, Ariel;}
+       #logo {
+        height: 80px;
+        color: white;
+        background-color: #e28412;
+        text-align: center;
+       }
+#logo h1{
+            font-family: Arya;
+            line-height: 2.2;
+        }
+#logo a:hover, .nav-link:hover, .nav-item:hover {cursor: pointer; color: #746d75;}
+#app .dropdown-item:hover{background-color: #746d75; }
+#logo a, .nav-link, #app .dropdown-item {color: white; text-decoration: none; /* no underline */ } 
+.nav-item{background-color: #e28412; margin-left: 5px; margin-right:5px; color: white;}      
+.dropdown-menu{background-color: #e28412;}

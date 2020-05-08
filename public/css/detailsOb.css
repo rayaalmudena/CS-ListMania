@@ -1,0 +1,63 @@
+.title { color:white; text-align: center; background-color:#e28413; margin:0; padding:0; margin-bottom:10px}
+.well {background-color: #EEEBEE;}
+.textDiv { font-size: 18px; color: black;}
+.container{margin: 0 auto;}
+.objectSearch{
+  display: block;
+    width: 100%;
+}
+
+[id="heart"] {
+  position: absolute;
+  left: -100vw;
+}
+
+[for="heart"] {
+  color: #aab8c2;
+  cursor: pointer;
+  font-size: 6em;
+  align-self: center;  
+  transition: color 0.2s ease-in-out;
+}
+
+[for="heart"]:hover {
+  color: grey;
+}
+
+[for="heart"]::selection {
+  color: none;
+  background: transparent;
+}
+
+[for="heart"]::moz-selection {
+  color: none;
+  background: transparent;
+}
+
+[id="heart"]:checked + label {
+  color: #e2264d;
+  will-change: font-size;
+}
+@keyframes heart {0%, 17.5% {font-size: 0;}}
+
+.list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.list-group-item {
+   
+  padding: 0.1rem 1.60rem;  
+  background-color: #EEEBEE;
+  border: 0px;
+}
+
+.list-group-item.active{
+  padding: 0.40rem 1.25rem;
+  background-color: #e28413;
+  border-color: #e28413;
+}
+
+#stats{
+  padding-left: 0px;
+}

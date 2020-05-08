@@ -1,0 +1,33 @@
+.card-header{
+    color:white;
+    background-color:#746d75;
+}
+.card-body{
+   background-color: #e28412; color:white;
+}
+.horizontal-scroll-container{
+    overflow-y: hidden; 
+    overflow-x: auto;
+    width: auto;
+    padding: 10px;
+    white-space: nowrap;
+}
+.horizontal-scroll-container div {
+    background-color:white;
+    text-align:center;
+    height:auto;
+    width: 100px;
+    margin: 0 0px 0 0;
+    padding: 0 0 10px 0;
+    display: inline-block; 
+}
+
+.searchThisMS>p, .searchThisB>p{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+
+[name=book]>p{
+   word-wrap: break-word;
+}
