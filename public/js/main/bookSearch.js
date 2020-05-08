@@ -160,6 +160,7 @@ function addHTMLDetailBook(country, id, title, authors, categories, description,
 function addHTMLSearchBook(title,id, type,image){
 
     if ($("#"+id+"[type="+type+"s]").length == 0){
+        $("#fail").remove()
         
         $(".search").append('<div id="'+id+'" type="'+type+'s" class="col-sm-2 col-md-2 col-xs-2"><a href="/'+type+'/'+id+'"><figure class="figure"><img src="'+image+'" alt="..." class="figure-img img-fluid rounded" style="height: 200px;"> <figcaption class="figure-caption">'+title+'</figcaption></figure></a></div>');
     
