@@ -1,8 +1,5 @@
 function searchMovieOrShowByIdDB (id){
 
-	//http://www.omdbapi.com/?t=
-	//http://www.omdbapi.com/?i=    
-
     $.ajax({
 	    method: 'GET',
 	    url: '/getMovieOrShow/'+id,
@@ -10,11 +7,11 @@ function searchMovieOrShowByIdDB (id){
 	    data:{},
 	    success: function(result){
         	//Change data
-
-            if (Object.keys(result).length==0){              	
+            len=Object.keys(result).length;
+            if (len==0){     
+                         	
             	//THERE IS NO DATA ON DB Search on API
-            	searchMovieOrShowByIdAPI(id);
-			    
+            	searchMovieOrShowByIdAPI(id);			    
 			}
 			else{
 				if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1 || window.location.href.indexOf("book")!= -1) {
@@ -52,21 +49,51 @@ function searchMovieOrShowByIdAPI(id){
         url: "http://www.omdbapi.com/?i=" + id + "&apikey=ea71ae3c" ,
         dataType: 'jsonp',
         success: function(result){
-        	
+        	//console.log(result);
         	//save detail
         	if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1 || window.location.href.indexOf("book")!= -1) {
       			
-      			addHTMLDetailMovieShow(result['title'], result['awards'], result['country'], result['director'],result['writer'],result['actors'],result['genre'],result['language'],result['plot'],result['image'],result['rated'],result['released'],result['runtime'],result['type'],result['imdbID']);
+      			addHTMLDetailMovieShow(result['Title'], result['Awards'], result['Country'], result['Director'],result['Writer'],result['Actors'],result['Genre'],result['Language'],result['Plot'],result['Poster'],result['Rated'],result['Released'],result['Runtime'],result['Type'],result['imdbID']);
 
-   			}else{
+   			}else if(window.location.href.indexOf("search") != -1 ){
+
+                addHTMLSearchMovieShow(result['Title'],result['imdbID'],result['Type'],result['Poster']);
+
+            }else{
    				//save in home
    				$(".searchThisMS > div#"+result['imdbID']+ "> img").attr("src", result['image']).removeAttr("href");
         	}
         	
-          	saveMovieOrShow(result['title'], result['awards'], result['country'], result['director'],result['writer'],result['actors'],result['genre'],result['language'],result['plot'],result['image'],result['rated'],result['released'],result['runtime'],result['type'],result['imdbID']);
+          	saveMovieOrShow(result['Title'], result['Awards'], result['Country'], result['Director'],result['Writer'],result['Actors'],result['Genre'],result['Language'],result['Plot'],result['Poster'],result['Rated'],result['Released'],result['Runtime'],result['Type'],result['imdbID']);
         },
         error: function(error){
         	//console.log(error);
+        }
+
+    });
+
+}
+
+function searchMovieOrShowByNameAPI(name){
+
+    //http://www.omdbapi.com/?t=
+    //http://www.omdbapi.com/?i=
+
+    $.ajax({
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type':'application/json'
+             },
+        method: "POST",
+        url: "http://www.omdbapi.com/?t=" + name + "&apikey=ea71ae3c" ,
+        dataType: 'jsonp',
+        success: function(result){
+                
+            searchMovieOrShowByIdDB(result['imdbID']);
+
+        },
+        error: function(error){
+            //console.log(error);
         }
 
     });
@@ -123,6 +150,26 @@ function addHTMLDetailMovieShow(Title,Awards,Country,Director,Writer,Actors,Genr
 	$('.addContent').append('<b>Runtime</b>: '+ Runtime+"<br/>");
 	$("#photo").attr("src", Poster);
 	
+}
+
+
+function addHTMLSearchMovieShow(title,id, type,image){
+
+    if (type=="movie") {
+        newtype="movie";
+    }else{
+        newtype="serie";
+    }
+    
+
+    if ($("#"+id+"[type="+newtype+"s]").length == 0){
+        $("#fail").remove()
+        
+        $(".search").append('<div id="'+id+'" type="'+type+'s" class="col-sm-2 col-md-2 col-xs-2"><a href="/'+newtype+'/'+id+'"><figure class="figure"><img src="'+image+'" alt="..." class="figure-img img-fluid rounded" style="height: 200px;"> <figcaption class="figure-caption">'+title+'</figcaption></figure></a></div>');
+    
+    }
+   
+
 }
 
 

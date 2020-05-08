@@ -2,8 +2,6 @@ function searchBookByIdDB (id){
 
     $.ajax({
 
-        //https://www.googleapis.com/books/v1/volumes/hTDXDwAAQBAJ
-        //https://www.googleapis.com/books/v1/volumes?q=shiver
 
         method: 'GET',
         url: '/getBook/'+id,
@@ -58,6 +56,10 @@ function searchBookByIdAPI (id){
                 
                 addHTMLDetailBook(result.accessInfo.country , result.id , result.volumeInfo.title ,JSON.stringify(result.volumeInfo.authors) ,JSON.stringify(result.volumeInfo.categories) ,result.volumeInfo.description, result.volumeInfo.imageLinks.thumbnail ,result.volumeInfo.language ,result.volumeInfo.maturityRating , result.volumeInfo.pageCount ,result.volumeInfo.publisher, result.volumeInfo.publishedDate);
 
+            }else if(window.location.href.indexOf("search") != -1 ){
+
+                addHTMLSearchBook(result.volumeInfo.title,result.id,"book", result.volumeInfo.imageLinks.thumbnail);
+
             }else{
                 //save in home                
                 $(".searchThisB > div#"+id+ "> img").attr("src", result.volumeInfo.imageLinks.thumbnail ).removeAttr("href");
@@ -73,6 +75,35 @@ function searchBookByIdAPI (id){
         }
 
     });
+}
+
+
+
+function searchBookByNameAPI(name){
+
+    $.ajax({
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type':'application/json'
+                 },
+            method: "GET",
+            url: "https://www.googleapis.com/books/v1/volumes?q="+name,
+            dataType: 'jsonp',
+            success: function(result){
+
+                var size = result.items.length;
+                for (i = 0; i < size; i++) {
+                  searchBookByIdDB(result.items[i].id);
+                }
+
+            },
+            error: function(error){
+               // console.log(error);
+            }
+
+        });
+
+
 }
 
 
@@ -123,6 +154,19 @@ function addHTMLDetailBook(country, id, title, authors, categories, description,
     $("#photo").attr("src", Image);
     
 }
+
+
+
+function addHTMLSearchBook(title,id, type,image){
+
+    if ($("#"+id+"[type="+type+"s]").length == 0){
+        
+        $(".search").append('<div id="'+id+'" type="'+type+'s" class="col-sm-2 col-md-2 col-xs-2"><a href="/'+type+'/'+id+'"><figure class="figure"><img src="'+image+'" alt="..." class="figure-img img-fluid rounded" style="height: 200px;"> <figcaption class="figure-caption">'+title+'</figcaption></figure></a></div>');
+    
+    }   
+
+}
+
 
 
 function saveBookUser (title,api_id,bookmark,line,rating,status,fav){

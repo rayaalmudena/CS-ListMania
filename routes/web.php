@@ -43,4 +43,7 @@ Route::get('/getBook/{id}', 'CachesController@getBook');
 
 
 
+Route::post('/search', 'SearchController@search');
+
+
 Auth::routes();

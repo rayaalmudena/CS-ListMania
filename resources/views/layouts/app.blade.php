@@ -58,10 +58,11 @@
                         <li class="nav-item" style="background-color: transparent; ">
                                 <!-- Search form -->
                                 <div class="md-form" >
-                                    
-                                        <label><input style="margin-right: 5px;" name="searchThis" type="text" placeholder="Search" aria-label="Search"></label>
-                                        <button id="searchThisBtn" style="color: white;background:#e28412; border-radius: 0px; "  type="" class="btn"><i style="color: white;background:#e28412;" class="fas fa-search"></i></button>
-                                    
+                                        <form action="/search" method="POST" role="search">
+                                            @csrf
+                                            <label><input style="margin-right: 5px;" name="searchThis" type="text" placeholder="Search" aria-label="Search"></label>
+                                            <button id="searchThisBtn" style="color: white;background:#e28412; border-radius: 0px; "  type="" class="btn"><i style="color: white;background:#e28412;" class="fas fa-search"></i></button>
+                                        </form>                     
                                 </div>
 
                             </li>
@@ -129,17 +130,7 @@
         <main class="py-4 primaryContainer">
             @yield('content')
         </main>
-        <div class="secondContainer" hidden="hidden">
-             <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-10">
-                        <div class="card">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </body>
 
