@@ -8,7 +8,6 @@ $( document ).ready(function() {
   		searchBookByIdDB($( this ).attr("id"));
 	});	
 
-	$(".home").removeAttr("hidden");
 });
 
 

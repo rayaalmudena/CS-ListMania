@@ -88,8 +88,13 @@ function searchMovieOrShowByNameAPI(name){
         url: "http://www.omdbapi.com/?t=" + name + "&apikey=ea71ae3c" ,
         dataType: 'jsonp',
         success: function(result){
-                
-            searchMovieOrShowByIdDB(result['imdbID']);
+
+            if (result.length != undefined) {
+                var size = result.length;
+                for (i = 0; i < size; i++) {
+                  searchMovieOrShowByIdDB(result[i]['imdbID']);
+                }             
+            }
 
         },
         error: function(error){
@@ -163,8 +168,7 @@ function addHTMLSearchMovieShow(title,id, type,image){
     
 
     if ($("#"+id+"[type="+newtype+"s]").length == 0){
-        $("#fail").remove()
-        
+       
         $(".search").append('<div id="'+id+'" type="'+type+'s" class="col-sm-2 col-md-2 col-xs-2"><a href="/'+newtype+'/'+id+'"><figure class="figure"><img src="'+image+'" alt="..." class="figure-img img-fluid rounded" style="height: 200px;"> <figcaption class="figure-caption">'+title+'</figcaption></figure></a></div>');
     
     }

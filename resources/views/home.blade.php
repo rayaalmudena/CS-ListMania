@@ -30,7 +30,7 @@
                                     <p name="{{$movie->name_object}}">
                                         Top {{$numberTop}}:<br> 
                                         {{$movie->name_object}}</p>
-                                    <img style="height: 120px;" alt="image{{$movie->name_object}}">
+                                    <img style="height: 120px;" src="{{$movie->image}}" sr alt="image{{$movie->name_object}}">
                                 </div>
                             </a> 
                             @php
@@ -66,7 +66,7 @@
                                 <div name="show" id="{{ $show->api_id }}">
                                     Top {{$numberTop}}:<br>
                                     <p name="name">{{$show->name_object}}</p>
-                                    <img style="height: 120px;" alt="image{{$show->name_object}}">
+                                    <img style="height: 120px;" src="{{$show->image}}" alt="image{{$show->name_object}}">
                                 </div>
                             </a> 
                             @php
@@ -105,7 +105,7 @@
                                 <div name="book" id="{{ $book->api_id }}">
                                    Top {{$numberTop}}:<br>
                                     <p name="name">{{$book->name_object}}</p>
-                                    <img style="height: 120px;" alt="image{{$book->name_object}}">
+                                    <img style="height: 120px;" src="{{$book->image}}" alt="image{{$book->name_object}}">
                                 </div>
                             </a>
                             @php

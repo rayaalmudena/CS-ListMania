@@ -13,11 +13,11 @@
 @section('content')
 
 <div class="container" searched="{{ $query }}" >    
-        <p style="font-size: 16px;"> The Search results for <b> {{ $query }} </b> are :</p>
+        <p id="success" style="font-size: 16px;"> The Search results for <b> {{ $query }} </b> are :</p>
     <div class="row search" style="float: left; ">
         @if(isset($details))
         @foreach($details as $object)
-            <div  class="col-sm-2 col-md-2 col-xs-2" id="{{$object->api_id}}" type={{$object->type}}>
+            <div  class="col-sm-2 col-md-2 col-xs-2 searchedItems" id="{{$object->api_id}}" type={{$object->type}}>
             @if($object->type=="movie")
                 <a href="/movie/{{ $object->api_id }}">
             @elseif($object->type=="series")
@@ -35,7 +35,7 @@
         @endforeach  
     </div>
     @else
-       <p id="fail" class="p-3 mb-2 bg-danger text-white mx-auto" style="font-size: 16px;width: max-content;"> The Search for <b>{{ $query }}</b> was unsuccessful.</p> 
+       <p id="fail" class="p-3 mb-2 bg-danger text-white mx-auto" style="font-size: 16px;width: max-content;" hidden="hidden"> The Search for <b>{{ $query }}</b> was unsuccessful.</p> 
     @endif
 </div>
 @endsection

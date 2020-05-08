@@ -24,11 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $movies = DB::select('SELECT api_id, name_object, round(AVG(rating),2) as rating FROM saved_objects WHERE type="movies" and rating is not null  GROUP BY api_id, name_object ORDER BY rating DESC LIMIT 10');
+        $movies = DB::select('SELECT saved_objects.api_id, saved_objects.name_object,image, round(AVG(saved_objects.rating),2) as rating, caches.image FROM saved_objects LEFT JOIN caches ON saved_objects.api_id = caches.api_id WHERE saved_objects.type="movies" and rating is not null  GROUP BY saved_objects.api_id, saved_objects.name_object, caches.image ORDER BY saved_objects.rating DESC LIMIT 10');
 
-        $shows = DB::select('SELECT api_id, name_object, round(AVG(rating),2) as rating FROM saved_objects WHERE type="series" and rating is not null GROUP BY api_id, name_object ORDER BY rating DESC LIMIT 10');
+        $shows = DB::select('SELECT saved_objects.api_id, saved_objects.name_object,image, round(AVG(saved_objects.rating),2) as rating, caches.image FROM saved_objects LEFT JOIN caches ON saved_objects.api_id = caches.api_id WHERE saved_objects.type="series" and rating is not null  GROUP BY saved_objects.api_id, saved_objects.name_object, caches.image ORDER BY saved_objects.rating DESC LIMIT 10');
 
-        $books = DB::select('SELECT api_id, name_object, round(AVG(rating),2) as rating FROM saved_objects WHERE type="books" and rating is not null GROUP BY api_id, name_object ORDER BY rating DESC LIMIT 10');
+        $books = DB::select('SELECT saved_objects.api_id, saved_objects.name_object,image, round(AVG(saved_objects.rating),2) as rating, caches.image FROM saved_objects LEFT JOIN caches ON saved_objects.api_id = caches.api_id WHERE saved_objects.type="books" and rating is not null  GROUP BY saved_objects.api_id, saved_objects.name_object, caches.image ORDER BY saved_objects.rating DESC LIMIT 10');
        // dd($series);
 
         return view('home', ['movies'=>$movies, 'shows'=>$shows, 'books'=>$books]);

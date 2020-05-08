@@ -5,5 +5,13 @@ $( document ).ready(function() {
 	
 });
 
-
+$(document).load(function () {
+ 	
+	if ($(".searchedItems").length){   
+		
+	}else{
+		$("#success").hide();
+		$("#fail").removeAttr("hidden");
+	}
+});
   
