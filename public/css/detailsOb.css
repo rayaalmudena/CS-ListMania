@@ -61,3 +61,28 @@
 #stats{
   padding-left: 0px;
 }
+
+.list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+[id="thumb"] {
+  position: absolute;
+  left: -100vw;
+}
+
+[for="thumb"] {
+  color: #aab8c2;
+  cursor: pointer;
+  font-size: 6em;
+  align-self: center;  
+  transition: color 0.2s ease-in-out;
+}
+
+[for="thumb"]:hover {
+  color: grey;
+}
+
+
+

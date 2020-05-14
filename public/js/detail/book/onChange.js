@@ -1,7 +1,7 @@
   $( document ).ready(function() {  
 
        //update database
-       $('input, select').change(function () {
+       $('.input-group>input, .input-group>select').change(function () {
 
           var api_id=$(".objectSearch").attr("id");
           var bookmark=$("#bookmark").val();

@@ -1,6 +1,6 @@
 $( document ).ready(function() {  
 
-	$(".searchThisMS >div").each(function() {		
+	$(".searchThisMS > div").each(function() {		
   		searchMovieOrShowByIdDB($( this ).attr("id"));
 	});
 

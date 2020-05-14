@@ -14,9 +14,12 @@ class CreateReviewsTable extends Migration
     public function up()
     {
         Schema::create('reviews', function (Blueprint $table) {
+            
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('saved_object_id')->unsigned();
+            $table->longText('api_id');
+            $table->longText('type');
+
             $table->string('title',80);
             $table->longText('text',900);
             $table->timestamps();
@@ -26,10 +29,6 @@ class CreateReviewsTable extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
 
-            //$table->index('saved_object_id', 'fk_saved_object_id');
-            $table->foreign('saved_object_id')
-                ->references('id')->on('saved_objects')
-                ->onDelete('cascade');
         });
     }
 

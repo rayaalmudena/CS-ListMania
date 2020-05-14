@@ -31,3 +31,12 @@
 [name=book]>p{
    word-wrap: break-word;
 }
+
+.card-header:first-child {
+    border-radius: 0;
+}
+.card{
+    border: 0px solid rgba(0, 0, 0, 0.125); */
+    border-radius: 0rem;
+}
+}

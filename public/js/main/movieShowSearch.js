@@ -88,13 +88,13 @@ function searchMovieOrShowByNameAPI(name){
         url: "http://www.omdbapi.com/?t=" + name + "&apikey=ea71ae3c" ,
         dataType: 'jsonp',
         success: function(result){
-
-            if (result.length != undefined) {
-                var size = result.length;
-                for (i = 0; i < size; i++) {
-                  searchMovieOrShowByIdDB(result[i]['imdbID']);
-                }             
+            
+            if (result['Title']) {
+                console.log(result['Title']);
+                searchMovieOrShowByIdDB(result['imdbID']);
+                            
             }
+            
 
         },
         error: function(error){

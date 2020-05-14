@@ -2,6 +2,7 @@
 @section('links')
 <link href="{{ asset('css/lists.css') }}" rel="stylesheet">
 <script type="text/javascript" src ="{{ asset('js/tabslists.js') }}"></script>
+<script type="text/javascript" src ="{{ asset('js/listMain.js') }}"></script>
 @endsection
 @section('content')
 <div class="container">
@@ -41,7 +42,7 @@
                 	@php
                        $numberTop = 1;
                     @endphp
-                	<table class="table table-striped">
+                	<table class="table table-striped table-responsive-sm">
 					  <thead>
 					    <tr>
 					      <th scope="col"></th>
@@ -86,7 +87,7 @@
                 	@php
                        $numberTop = 1;
                     @endphp
-                	<table class="table table-striped">
+                	<table class="table table-striped table-responsive-sm">
 					  <thead>
 					    <tr>
 					      <th scope="col"></th>
@@ -123,7 +124,7 @@
                 	@php
                        $numberTop = 1;
                     @endphp
-                	<table class="table table-striped">
+                	<table class="table table-striped table-responsive-sm">
 					  <thead>
 					    <tr>
 					      <th scope="col"></th>
@@ -161,7 +162,7 @@
                 	@php
                        $numberTop = 1;
                     @endphp
-                	<table class="table table-striped">
+                	<table class="table table-striped table-responsive-sm">
 					  <thead>
 					    <tr>
 					      <th scope="col"></th>
@@ -199,7 +200,7 @@
                 	@php
                        $numberTop = 1;
                     @endphp
-                	<table class="table table-striped">
+                	<table class="table table-striped table-responsive-sm">
 					  <thead>
 					    <tr>
 					      <th scope="col"></th>

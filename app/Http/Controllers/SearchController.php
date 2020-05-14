@@ -14,7 +14,7 @@ class SearchController extends Controller
      public function search(Request $request)
     { 
 	   	$search = $request->searchThis;
-	    $user = DB::select('SELECT  DISTINCT api_id, type, image, title FROM caches WHERE LOWER(title) like LOWER("%'.$search.'%")  ORDER BY title DESC ');
+	    $user = DB::select('SELECT DISTINCT api_id, type, image, title FROM caches WHERE LOWER(title) like LOWER("%'.$search.'%")  ORDER BY title DESC ');
 	    if (count ( $user ) > 0)
 	        return view ( 'search' )->withDetails ( $user )->withQuery ( $search );
 	    else

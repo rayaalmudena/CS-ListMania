@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/home', 'HomeController@index'); //After Login
 Route::get('/', 'HomeController@index')->name('home'); // General home
 
+//user profile
+Route::get('/profile/{id}', 'UserProfileController@index')->name('profile');
+
 //Users Lists
 Route::get('/moviesList/{id}', 'SavedObjectsController@moviesUser')->name('moviesList');
 Route::get('/showsList/{id}', 'SavedObjectsController@showsUser')->name('showsList');
@@ -26,7 +29,10 @@ Route::post('/saveMovieUser', 'SavedObjectsController@saveMovieUser');
 Route::post('/saveShowUser', 'SavedObjectsController@saveShowUser');
 Route::post('/saveBookUser', 'SavedObjectsController@saveBookUser');
 
-
+//save like on review
+Route::post('/likeUser', 'ReviewsController@likeUser');
+//save review
+Route::post('/saveReview/{type}/{id}', 'ReviewsController@saveReview');
 
 //Detail objects views
 Route::get('/movie/{id}', 'CachesController@indexMovie')->name('movie');
@@ -41,9 +47,7 @@ Route::get('/getMovieOrShow/{id}', 'CachesController@getMovieOrShow');
 Route::post('/saveBook', 'CachesController@saveBook');
 Route::get('/getBook/{id}', 'CachesController@getBook');
 
-
-
+//search filter
 Route::post('/search', 'SearchController@search');
-
 
 Auth::routes();

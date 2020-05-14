@@ -3,7 +3,7 @@ $( document ).ready(function() {
       if (window.location.href.indexOf("movie") != -1){
 
         //update database
-        $('input, select').change(function () {
+        $('.input-group>input, .input-group>select').change(function () {
 
           var api_id=$(".objectSearch").attr("id");
           var timemark=$("#timemark").val();
@@ -22,7 +22,7 @@ $( document ).ready(function() {
       }else{
 
         //update database
-       $('input, select').change(function () {
+       $('.input-group>input, .input-group>select').change(function () {
 
           var api_id=$(".objectSearch").attr("id");
           var timemark=$("#timemark").val();
