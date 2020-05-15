@@ -2,7 +2,22 @@
 @section('links')
 <link href="{{ asset('css/lists.css') }}" rel="stylesheet">
 <script type="text/javascript" src="{{ asset('js/tabslists.js') }}"></script>
-<script type="text/javascript" src ="{{ asset('js/listMain.js') }}"></script>
+
+@guest
+	<script type="text/javascript" src ="{{ asset('js/listMain.js') }}"></script>
+	@else
+		@php
+			$usernameLoggedIn = Auth::user()->name;
+	    @endphp
+	    @if($usernameLoggedIn==$username)
+	    	<script type="text/javascript" src="{{ asset('js/main/movieShowSearch.js') }}"></script>
+	    	<script type="text/javascript" src="{{ asset('js/main/bookSearch.js') }}"></script>
+	    	<script type="text/javascript" src ="{{ asset('js/listUser.js') }}"></script>
+	    	<script type="text/javascript" src ="{{ asset('js/onChangeList.js') }}"></script>
+	    @else
+	    	<script type="text/javascript" src ="{{ asset('js/listMain.js') }}"></script>
+	    @endif 
+	@endguest
 @endsection
 
 @section('content')
@@ -10,21 +25,11 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
      	  
-        	@guest
-            	<h3><b>{{$username}}</b>'s show list</h3>
-            @else
-
-            	@php
-            	$usernameLoggedIn = Auth::user()->name;
-	            @endphp
-
-	            @if($usernameLoggedIn==$username)
-	            	 <h3><b>Your</b> show list</h3>
-	            @else
-	            	 <h3><b>{{$username}}</b>'s show list</h3>
-	            @endif
-        	 
-        	@endguest
+        	@if($usernameLoggedIn==$username)
+				<h3><b>Your</b> movie list</h3>
+			@else
+				<h3><b>{{$username}}</b>'s show list</h3>
+			@endif
         
 			 <!-- Tab links -->
 			<div class="tab">
@@ -40,13 +45,9 @@
 			  	@if (count($all) == 0)
                     Your don't have anything.
                 @else  
-                	@php
-                       $numberTop = 1;
-                    @endphp
                 	<table class="table table-striped table-responsive-sm">
 					  <thead>
 					    <tr>
-					      <th scope="col"></th>
 					      <th scope="col">Name</th>
 					      <th scope="col">Season</th>
 					      <th scope="col">Episode</th>
@@ -57,184 +58,40 @@
 					  </thead>
 					  <tbody>
 	                 @foreach ($all as $allOne)
-	                 	<tr>
-						    <th score="row">{{$numberTop}}</th>
-						    <td><a href="/show/{{ $allOne->api_id }}">{{$allOne->name_object}}</a></td>
-						    <td>{{$allOne->season}}</td>
-						    <td>{{$allOne->episode}}</td>
-						    <td>{{$allOne->timemark}}</td>	
-						    <td>{{$allOne->status}}</td>	
-						    <td>{{$allOne->rating}}</td>
-	                	</tr>
-	                	@php
-                            $numberTop =$numberTop+1;
-                        @endphp
+	                 	@if($usernameLoggedIn==$username)
+	                 		<tr class="{{ $allOne->api_id}}">						    
+									<td><a href="/movie/{{ $allOne->api_id }}" name="title">{{$allOne->name_object}}</a></td>
+									<td><input type="number" value="{{$allOne->season}}" name="season" min="0" step="1"></td>
+									<td><input type="number" value="{{$allOne->episode}}" name="episode" min="0" step="1"></td>		
+									<td><input type="number" value="{{$allOne->timemark}}" name="timemark" min="0" step="1"></td>	
+									<td class="status" status="{{$allOne->status}}">
+										<select class="custom-select" name="status">
+								                  <option value="" selected>Choose...</option>
+								                  <option value="Watching">Watching</option>
+								                  <option value="Dropped">Droppped</option>
+								                  <option value="Completed">Completed</option>
+								                  <option value="Plan to watch">Plan to watch</option>
+								        </select>
+								     </td>	
+									<td><input type="number" value="{{$allOne->rating}}" name="rating" value="" min="0" step="1" max="10"></td>
+									<td hidden="hidden"><input type="number" value="{{$allOne->favourite}}" name="fav"></td>
+								</tr>							
+						@else
+							<tr class="{{ $allOne->api_id}}">
+							    <td><a href="/show/{{ $allOne->api_id }}">{{$allOne->name_object}}</a></td>
+							    <td>{{$allOne->season}}</td>
+							    <td>{{$allOne->episode}}</td>
+							    <td>{{$allOne->timemark}}</td>	
+							    <td class="status">{{$allOne->status}}</td>	
+							    <td>{{$allOne->rating}}</td>						    
+	                		</tr>
+						@endif
+	                 	
 	                @endforeach
 	                	</tbody>
 					</table>
                 @endif
 			</div>
-
-			<div id="Watching" class="tabcontent">
-				@if (count($watching) == 0)
-                    Your don't have anything.
-                @else  
-                	@php
-                       $numberTop = 1;
-                    @endphp
-                	<table class="table table-striped table-responsive-sm">
-					  <thead>
-					    <tr>
-					      <th scope="col"></th>
-					      <th scope="col">Name</th>
-					      <th scope="col">Season</th>
-					      <th scope="col">Episode</th>
-					      <th scope="col">Timemark</th>
-					      <th scope="col">Status</th>
-					      <th scope="col">Rating</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-	                 @foreach ($watching as $watchingOne)
-	                 	<tr>
-						    <th score="row">{{$numberTop}}</th>
-						    <td><a href="/show/{{ $watchingOne->api_id }}">{{$watchingOne->name_object}}</a></td>
-						    <td>{{$watchingOne->season}}</td>
-						    <td>{{$watchingOne->episode}}</td>
-						    <td>{{$watchingOne->timemark}}</td>	
-						    <td>{{$watchingOne->status}}</td>	
-						    <td>{{$watchingOne->rating}}</td>
-	                	</tr>
-	                	@php
-                            $numberTop =$numberTop+1;
-                        @endphp
-	                @endforeach
-	                	</tbody>
-					</table>
-                @endif			  
-			</div>
-
-			<div id="Dropped" class="tabcontent">
-				@if (count($dropped) == 0)
-                    Your don't have anything.
-                @else  
-                	@php
-                       $numberTop = 1;
-                    @endphp
-                	<table class="table table-striped table-responsive-sm">
-					  <thead>
-					    <tr>
-					      <th scope="col"></th>
-					      <th scope="col">Name</th>
-					      <th scope="col">Season</th>
-					      <th scope="col">Episode</th>
-					      <th scope="col">Timemark</th>
-					      <th scope="col">Status</th>
-					      <th scope="col">Rating</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-	                 @foreach ($dropped as $droppedOne)
-	                 	<tr>
-						    <th score="row">{{$numberTop}}</th>
-						    <td><a href="/show/{{ $droppedOne->api_id }}">{{$droppedOne->name_object}}</a></td>
-						    <td>{{$droppedOne->season}}</td>
-						    <td>{{$droppedOne->episode}}</td>
-						    <td>{{$droppedOne->timemark}}</td>	
-						    <td>{{$droppedOne->status}}</td>	
-						    <td>{{$droppedOne->rating}}</td>
-	                	</tr>
-	                	@php
-                            $numberTop =$numberTop+1;
-                        @endphp
-	                @endforeach
-	                	</tbody>
-					</table>
-                @endif
-			  
-			</div>
-
-			<div id="Completed" class="tabcontent">
-				@if (count($completed) == 0)
-                    Your don't have anything.
-                @else  
-                	@php
-                       $numberTop = 1;
-                    @endphp
-                	<table class="table table-striped table-responsive-sm">
-					  <thead>
-					    <tr>
-					      <th scope="col"></th>
-					      <th scope="col">Name</th>
-					      <th scope="col">Season</th>
-					      <th scope="col">Episode</th>
-					      <th scope="col">Timemark</th>
-					      <th scope="col">Status</th>
-					      <th scope="col">Rating</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-	                 @foreach ($completed as $completedOne)
-	                 	<tr>
-						    <th score="row">{{$numberTop}}</th>
-						    <td><a href="/show/{{ $completedOne->api_id }}">{{$completedOne->name_object}}</a></td>
-						    <td>{{$completedOne->season}}</td>
-						    <td>{{$completedOne->episode}}</td>
-						    <td>{{$completedOne->timemark}}</td>	
-						    <td>{{$completedOne->status}}</td>	
-						    <td>{{$completedOne->rating}}</td>
-	                	</tr>
-	                	@php
-                            $numberTop =$numberTop+1;
-                        @endphp
-	                @endforeach
-	                	</tbody>
-					</table>
-                @endif
-			  
-			</div>
-
-			<div id="Plantowatch" class="tabcontent">
-				@if (count($planToWatch) == 0)
-                    Your don't have anything.
-                @else  
-                	@php
-                       $numberTop = 1;
-                    @endphp
-                	<table class="table table-striped table-responsive-sm">
-					  <thead>
-					    <tr>
-					      <th scope="col"></th>
-					      <th scope="col">Name</th>
-					      <th scope="col">Season</th>
-					      <th scope="col">Episode</th>
-					      <th scope="col">Timemark</th>
-					      <th scope="col">Status</th>
-					      <th scope="col">Rating</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-	                 @foreach ($planToWatch as $planToWatchOne)
-	                 	<tr>
-						    <th score="row">{{$numberTop}}</th>
-						    <td><a href="/show/{{ $planToWatchOne->api_id }}">{{$planToWatchOne->name_object}}</a></td>
-						    <td>{{$planToWatchOne->season}}</td>
-						    <td>{{$planToWatchOne->episode}}</td>
-						    <td>{{$planToWatchOne->timemark}}</td>	
-						    <td>{{$planToWatchOne->status}}</td>	
-						    <td>{{$planToWatchOne->rating}}</td>
-	                	</tr>
-	                	@php
-                            $numberTop =$numberTop+1;
-                        @endphp
-	                @endforeach
-	                	</tbody>
-					</table>
-                @endif			  
-			</div>
-            
-
-            
         </div>
     </div>
 </div>

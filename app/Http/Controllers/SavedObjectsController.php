@@ -11,34 +11,28 @@ use Auth;
 
 class SavedObjectsController extends Controller
 {
+
     public function moviesUser(Request $request, $id)
     {   
     	$username= DB::select('SELECT name, id FROM users WHERE id='.$id.'');
         $username=$username[0]->name;
               
-        $all = DB::select('SELECT * FROM saved_objects WHERE type="movies" and user_id='.$id.' and status is not null ORDER BY name_object DESC');
-        $watching = DB::select('SELECT * FROM saved_objects WHERE type="movies" and user_id='.$id.' and status="Watching" ORDER BY name_object DESC');
-        $dropped = DB::select('SELECT * FROM saved_objects WHERE type="movies" and user_id='.$id.' and status="Dropped" ORDER BY name_object DESC');
-        $planToWatch = DB::select('SELECT * FROM saved_objects WHERE type="movies" and user_id='.$id.' and status="Plan to watch" ORDER BY name_object DESC');
-        $completed = DB::select('SELECT * FROM saved_objects WHERE type="movies" and user_id='.$id.' and status="Completed" ORDER BY name_object DESC');
-
-        return view('lists.movies', ['all'=>$all, 'watching'=>$watching, 'dropped'=>$dropped, 'planToWatch'=>$planToWatch,'completed'=>$completed, 'username'=>$username, 'userid'=>$id]);
+        $all = DB::select('SELECT * FROM saved_objects WHERE type="movies" and user_id='.$id.' and status is not null ORDER BY name_object, status DESC');
+        
+        return view('lists.movies', ['all'=>$all, 'username'=>$username, 'userid'=>$id]);
     }
+
 
     public function showsUser(Request $request, $id)
     {   
     	$username= DB::select('SELECT name, id FROM users WHERE id='.$id);
         $username=$username[0]->name;
         
-        $all = DB::select('SELECT * FROM saved_objects WHERE type="series" and user_id='.$id.' and status is not null ORDER BY name_object DESC');
-        $watching = DB::select('SELECT * FROM saved_objects WHERE type="series" and user_id='.$id.' and status="Watching" ORDER BY name_object DESC');
-        $dropped = DB::select('SELECT * FROM saved_objects WHERE type="series" and user_id='.$id.' and status="Dropped" ORDER BY name_object DESC');
-        $planToWatch = DB::select('SELECT * FROM saved_objects WHERE type="series" and user_id='.$id.' and status="Plan to watch" ORDER BY name_object DESC');
-        $completed = DB::select('SELECT * FROM saved_objects WHERE type="series" and user_id='.$id.' and status="Completed" ORDER BY name_object DESC');
+        $all = DB::select('SELECT * FROM saved_objects WHERE type="series" and user_id='.$id.' and status is not null ORDER BY name_object, status DESC');       
 
-
-        return view('lists.shows', ['all'=>$all, 'watching'=>$watching, 'dropped'=>$dropped, 'planToWatch'=>$planToWatch,'completed'=>$completed, 'username'=>$username, 'userid'=>$id]);
+        return view('lists.shows', ['all'=>$all, 'username'=>$username, 'userid'=>$id]);
     }
+
 
     public function booksUser(Request $request, $id)
     {   
@@ -46,14 +40,9 @@ class SavedObjectsController extends Controller
         $username=$username[0]->name;
        
 
-        $all = DB::select('SELECT * FROM saved_objects WHERE type="books" and user_id='.$id.' and status is not null ORDER BY name_object DESC');
-        $watching = DB::select('SELECT * FROM saved_objects WHERE type="books" and user_id='.$id.' and status="Watching" ORDER BY name_object DESC');
-        $dropped = DB::select('SELECT * FROM saved_objects WHERE type="books" and user_id='.$id.' and status="Dropped" ORDER BY name_object DESC');
-        $planToWatch = DB::select('SELECT * FROM saved_objects WHERE type="books" and user_id='.$id.' and status="Plan to watch" ORDER BY name_object DESC');
-        $completed = DB::select('SELECT * FROM saved_objects WHERE type="books" and user_id='.$id.' and status="Completed" ORDER BY name_object DESC');
+        $all = DB::select('SELECT * FROM saved_objects WHERE type="books" and user_id='.$id.' and status is not null ORDER BY name_object, status DESC');
 
-     
-       return view('lists.books', ['all'=>$all, 'watching'=>$watching, 'dropped'=>$dropped, 'planToWatch'=>$planToWatch,'completed'=>$completed, 'username'=>$username, 'userid'=>$id]);
+       return view('lists.books', ['all'=>$all, 'username'=>$username, 'userid'=>$id]);
     }
 
 

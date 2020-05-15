@@ -87,7 +87,7 @@
                   <option value="Watching">Watching</option>
                   <option value="Dropped">Droppped</option>
                   <option value="Completed">Completed</option>
-                  <option value="Plan to watch">Plan to watch</option>¡
+                  <option value="Plan to watch">Plan to watch</option>
                 </select>
               </div>        
 
