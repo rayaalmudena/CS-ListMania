@@ -25,7 +25,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
         	
-        	@if($usernameLoggedIn==$username)
+        	@if(isset($usernameLoggedIn) && $usernameLoggedIn==$username)
 				<h3><b>Your</b> movie list</h3>
 			@else
 				<h3><b>{{$username}}</b>'s book list</h3>
@@ -60,7 +60,7 @@
 					  </thead>
 					  <tbody>
 	                 @foreach ($all as $allOne)
-	                 	@if($usernameLoggedIn==$username)
+	                 	@if(isset($usernameLoggedIn) && $usernameLoggedIn==$username)
 							<tr class="{{ $allOne->api_id}}">						    
 								<td><a href="/movie/{{ $allOne->api_id }}" name="title">{{$allOne->name_object}}</a></td>
 								<td><input type="number" value="{{$allOne->bookmark}}" name="bookmark" min="0" step="1"></td>
