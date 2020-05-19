@@ -22,7 +22,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
+    {
         $movies = DB::select('SELECT DISTINCT saved_objects.api_id, saved_objects.name_object, round(AVG(saved_objects.rating),2) as rating, caches.image FROM saved_objects LEFT JOIN caches ON saved_objects.api_id = caches.api_id WHERE saved_objects.type="movies" and rating is not null  GROUP BY saved_objects.api_id, saved_objects.name_object ORDER BY rating DESC LIMIT 10');
 
         $shows = DB::select('SELECT DISTINCT saved_objects.api_id, saved_objects.name_object, round(AVG(saved_objects.rating),2) as rating, caches.image FROM saved_objects LEFT JOIN caches ON saved_objects.api_id = caches.api_id WHERE saved_objects.type="series" and rating is not null  GROUP BY saved_objects.api_id, saved_objects.name_object ORDER BY rating DESC LIMIT 10');
