@@ -12,8 +12,8 @@ use DB;
 class SearchController extends Controller
 {
      public function search(Request $request)
-    { 
-	   	$search = $request->searchThis;
+    {
+		$search = $request->searchThis;
 	    $user = DB::select('SELECT DISTINCT api_id, type, image, title FROM caches WHERE LOWER(title) like LOWER("%'.$search.'%") group by api_id, type, title  ORDER BY title DESC ');
 	    if (count ( $user ) > 0)
 	        return view ( 'search' )->withDetails ( $user )->withQuery ( $search );
