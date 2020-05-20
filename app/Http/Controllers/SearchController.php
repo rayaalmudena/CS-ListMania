@@ -16,7 +16,7 @@ class SearchController extends Controller
 	   	$search = $request->searchThis;
 	    $user = DB::select('SELECT DISTINCT api_id, type, title FROM caches WHERE LOWER(title) like LOWER("%'.$search.'%") ORDER BY title DESC ');
 
-	    $imageAdd = DB::select('SELECT DISTINCT api_id, type, image  FROM caches WHERE LOWER(title) like LOWER("%'.$search.'%") group by api_id, type, image, ORDER BY title DESC ');
+	    $imageAdd = DB::select('SELECT DISTINCT api_id, type, image  FROM caches WHERE LOWER(title) like LOWER("%'.$search.'%") group by api_id, type, image');
 
 	    foreach ($user as $user1) {
                foreach ($imageAdd as $image) {
