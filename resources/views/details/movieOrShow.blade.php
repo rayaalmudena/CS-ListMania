@@ -67,7 +67,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default">Timemark</span>
                 </div>
-                <input type="text" class="form-control" id="timemark" value="" min="0" step="1" aria-label="timemark" aria-describedby="inputGroup-sizing-default">
+                <input type="text" class="form-control" id="timemark" value="" aria-label="timemark" aria-describedby="inputGroup-sizing-default">
               </div>          
 
               <div class="input-group col-12 ">

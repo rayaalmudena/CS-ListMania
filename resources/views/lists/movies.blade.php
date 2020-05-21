@@ -59,7 +59,7 @@
 							@if(isset($usernameLoggedIn) && $usernameLoggedIn==$username)
 								<tr class="{{ $allOne->api_id}}">						    
 									<td><a href="/movie/{{ $allOne->api_id }}" name="title">{{$allOne->name_object}}</a></td>
-									<td><input type="text" value="{{$allOne->timemark}}" name="timemark" min="0" step="1"></td>	
+									<td><input type="text" value="{{$allOne->timemark}}" name="timemark"></td>	
 									<td class="status" status="{{$allOne->status}}">
 										<select class="custom-select" name="status">
 								                  <option value="" selected>Choose...</option>
