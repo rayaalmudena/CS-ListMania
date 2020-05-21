@@ -2,6 +2,19 @@ $( document ).ready(function() {
 		
       if (window.location.href.indexOf("movie") != -1){
 
+        $('#timemark').on('input',function(e){
+            var api_id=$(".objectSearch").attr("id");
+            var timemark=$("#timemark").val();         
+            var rating=$("#rating").val();
+            var status=$("#status").val();          
+            if ( !$('[id=heart]:checked + label').css('color')) {                
+                var fav=0;
+              } else {
+                var fav=1;
+              }
+            saveMovieUser($("#title").text(),api_id,timemark,rating,status,fav);            
+          });
+
         //update database
         $('input, select').change(function () {
 
@@ -19,20 +32,26 @@ $( document ).ready(function() {
 
       });   
 
-          $('#timemark').on('input',function(e){
-            var api_id=$(".objectSearch").attr("id");
-            var timemark=$("#timemark").val();         
-            var rating=$("#rating").val();
-            var status=$("#status").val();          
-            if ( !$('[id=heart]:checked + label').css('color')) {                
-                var fav=0;
-              } else {
-                var fav=1;
-              }
-            saveMovieUser($("#title").text(),api_id,timemark,rating,status,fav);            
-          });    
+              
 
       }else{
+
+      $('#timemark').on('input',function(e){
+        
+          var api_id=$(".objectSearch").attr("id");
+          var timemark=$("#timemark").val();
+          var season=$("#season").val();
+          var episode=$("#episode").val();
+          var rating=$("#rating").val();
+          var status=$("#status").val();          
+          if ( !$('[id=heart]:checked + label').css('color')) {                
+              var fav=0;
+            } else {
+              var fav=1;            }
+
+             
+            saveMovieUser($("#title").text(),api_id,timemark,rating,status,fav);            
+          });
 
         //update database
        $('input, select').change(function () {
@@ -52,21 +71,7 @@ $( document ).ready(function() {
 
        });
 
-       $('#timemark').on('input',function(e){
-          var api_id=$(".objectSearch").attr("id");
-          var timemark=$("#timemark").val();
-          var season=$("#season").val();
-          var episode=$("#episode").val();
-          var rating=$("#rating").val();
-          var status=$("#status").val();          
-          if ( !$('[id=heart]:checked + label').css('color')) {                
-              var fav=0;
-            } else {
-              var fav=1;            }
 
-             
-            saveMovieUser($("#title").text(),api_id,timemark,rating,status,fav);            
-          }); 
 
       }
 
