@@ -47,26 +47,38 @@
 
               <div class="input-group col-12">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-default">Bookmark</span>
+                  <span class="input-group-text">Bookmark</span>
                 </div>
                 <input type="number" class="form-control" id="bookmark" value="" min="0" step="10" aria-label="bookmark" aria-describedby="inputGroup-sizing-default">
               </div>
 
               <div class="input-group col-12">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-default">Line</span>
+                  <span class="input-group-text">Line</span>
                 </div>
                 <input type="number" class="form-control" id="line" value="" min="0" step="1" aria-label="line" aria-describedby="inputGroup-sizing-default">
               </div>                           
 
 
-              <div class="input-group col-12">
+              <div class="input-group col-12 ">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-default">Rating</span>
+                  <label class="input-group-text" for="status">Rating</label>
                 </div>
-                <input type="number" id="rating" value="" min="0" max="10" step="1" class="form-control" aria-label="ranking" aria-describedby="inputGroup-sizing-default">
-              </div>
-
+                <select class="custom-select" id="rating">
+                  <option value="" selected>Choose...</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div> 
 
               <div class="input-group col-12 ">
                 <div class="input-group-prepend">

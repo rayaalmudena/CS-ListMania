@@ -1,8 +1,6 @@
 function searchBookByIdDB (id){
 
     $.ajax({
-
-
         method: 'GET',
         url: '/getBook/'+id,
         dataType: 'json',   

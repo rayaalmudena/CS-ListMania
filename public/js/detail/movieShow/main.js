@@ -9,7 +9,7 @@ $( document ).ready(function() {
      searchMovieOrShowByIdDB($(".objectSearch").attr("id"));  
     
     }
-  
+  	
     setTimeout(function() {		
 			$(".container").removeAttr("hidden");	
 	}, 450);

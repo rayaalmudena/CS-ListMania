@@ -27,25 +27,29 @@ $( document ).ready(function() {
   $( ".status" ).each(function() {      
     $(this).find("select").val($(this).attr("status"));
   });
-       
+  
+   $( ".rating" ).each(function() {      
+    $(this).find("select").val($(this).attr("rating"));
+  });
 
 
-  $('#Watching').find( "select" ).each(function() {
+
+  $('#Watching').find( "[name='status']" ).each(function() {
  		if ($( this ).val()!="Watching") {
  			$(this).parent().parent().remove();
  		}
 	});  
-	$('#Dropped').find( "select" ).each(function() {
+	$('#Dropped').find( "[name='status']" ).each(function() {
  		if ($( this ).val()!="Dropped") {
  			$(this).parent().parent().remove();
  		}
 	});
-	$('#Completed').find( "select" ).each(function() {
+	$('#Completed').find( "[name='status']" ).each(function() {
  		if ($( this ).val()!="Completed") {
  			$(this).parent().parent().remove();
  		}
 	});
-	$('#Plantowatch').find( "select" ).each(function() {
+	$('#Plantowatch').find( "[name='status']" ).each(function() {
  		if ($( this ).val()!="Plan to watch") {
  			$(this).parent().parent().remove();
  		}
