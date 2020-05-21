@@ -89,8 +89,7 @@ function searchMovieOrShowByNameAPI(name){
         dataType: 'jsonp',
         success: function(result){
             
-            if (result['Title']) {
-                //console.log(result['Title']);
+            if (result['Title']) {                
                 searchMovieOrShowByIdDB(result['imdbID']);
                             
             }
