@@ -1,13 +1,7 @@
 $( document ).ready(function() { 
 
-     $('input, select').change(function (e) {
-          
-          api_id= $(':focus').parent().parent().attr("class"); 
-          name= $(':focus').attr('name');
 
-          $('.'+api_id+" [name='"+name+"']" ).each(function() {
-              $( this ).val($(':focus').val());
-          });
+    function save(api_id){
           
           if (window.location.href.indexOf("movie") != -1){
             
@@ -43,7 +37,33 @@ $( document ).ready(function() {
               saveBookUser(title,api_id,bookmark,line,rating,status,fav);
 
           }
+      }
 
+     $('input, select').change(function (e) {
+          
+          api_id= $(':focus').closest( "tr" ).attr("class"); 
+          name= $(':focus').attr('name');
+          //alert($(":focus").attr("name"))
+         /** if (api_id === undefined && api_id === undefined){
+            name="timemark";
+            select=($(':focus').closest( "select" ));
+
+            api_id=select.closest( "tr" ).attr("class");
+          }**/
+
+          $('.'+api_id+" [name='"+name+"']" ).each(function() {
+              $( this ).val($(':focus').val());
+          });
+
+          save(api_id);
+
+      });
+
+
+      $('input[name="timemark"').on('input',function(e){
+        api_id= $(':focus').closest( "tr" ).attr("class"); 
+        name= $(':focus').attr('name');
+        save(api_id);
       });
 
 });
