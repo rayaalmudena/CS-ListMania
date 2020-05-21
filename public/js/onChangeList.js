@@ -39,6 +39,16 @@ $( document ).ready(function() {
           }
       }
 
+      $('input[name="timemark"').on('input',function(e){
+
+        api_id= $(':focus').closest( "tr" ).attr("class"); 
+        name= $(':focus').attr('name');
+        $('.'+api_id+" [name='"+name+"']" ).each(function() {
+              $( this ).val($(':focus').val());
+         });
+        save(api_id);
+      });
+
      $('input, select').change(function (e) {
           
           api_id= $(':focus').closest( "tr" ).attr("class"); 
@@ -60,10 +70,6 @@ $( document ).ready(function() {
       });
 
 
-      $('input[name="timemark"').on('input',function(e){
-        api_id= $(':focus').closest( "tr" ).attr("class"); 
-        name= $(':focus').attr('name');
-        save(api_id);
-      });
+     
 
 });
