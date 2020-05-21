@@ -90,7 +90,7 @@ function searchMovieOrShowByNameAPI(name){
         success: function(result){
             
             if (result['Title']) {
-                console.log(result['Title']);
+                //console.log(result['Title']);
                 searchMovieOrShowByIdDB(result['imdbID']);
                             
             }

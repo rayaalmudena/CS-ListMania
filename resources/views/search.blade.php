@@ -18,7 +18,7 @@
         @if(isset($details))
         @foreach($details as $object)
             <div  class="col-sm-2 col-md-2 col-xs-2 searchedItems" id="{{$object->api_id}}" type={{$object->type}}>
-            @if($object->type=="movie")
+            @if($object->type=="movies")
                 <a href="/movie/{{ $object->api_id }}">
             @elseif($object->type=="series")
                 <a href="/show/{{ $object->api_id }}">
