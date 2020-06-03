@@ -14,11 +14,11 @@ function searchMovieOrShowByIdDB (id){
             	searchMovieOrShowByIdAPI(id);
             }
             else{
-                if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1 || window.location.href.indexOf("book")!= -1) {
+                if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1) {
 
 
                   addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);
-                  $(".container").removeAttr("hidden");   
+                  $(".container").css("visibility", "visible");   
               }else{
 
 	   				//save in home
@@ -53,7 +53,7 @@ function searchMovieOrShowByIdDBType (id, type){
             else{                
                 if(result[0]['type']==type){
                     addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);    
-                    $(".container").removeAttr("hidden");   
+                    $(".container").css("visibility", "visible");   
                 }else{
                    window.location.href = "/";
                }
@@ -84,7 +84,7 @@ function searchMovieOrShowByIdAPI(id){
         	if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1 || window.location.href.indexOf("book")!= -1) {
 
                addHTMLDetailMovieShow(result['Title'], result['Awards'], result['Country'], result['Director'],result['Writer'],result['Actors'],result['Genre'],result['Language'],result['Plot'],result['Poster'],result['Rated'],result['Released'],result['Runtime'],result['Type'],result['imdbID']);
-               $(".container").removeAttr("hidden");   
+               $(".container").css("visibility", "visible");   
 
            }else if(window.location.href.indexOf("search") != -1 ){
 
