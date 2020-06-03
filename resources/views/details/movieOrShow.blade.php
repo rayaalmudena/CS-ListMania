@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('links')
-
 <script type="text/javascript" src="{{ asset('js/main/movieShowSearch.js') }}"></script>
 <link href="{{ asset('css/detailsOb.css') }}" rel="stylesheet"> 
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
@@ -25,7 +24,7 @@
 
 
 @section('content')
-<div class="container" >
+<div class="container" hidden="hidden">
   <div class="col-12">    
 
     <div class="row">
