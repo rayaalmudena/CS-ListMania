@@ -35,7 +35,7 @@ function searchMovieOrShowByIdDB (id){
 }
 
 
-function searchMovieOrShowByIdDB_Type (id, type){
+function searchMovieOrShowByIdDBType (id, type){
 
     $.ajax({
         method: 'GET',
@@ -50,8 +50,7 @@ function searchMovieOrShowByIdDB_Type (id, type){
                 //THERE IS NO DATA ON DB Search on API
                 searchMovieOrShowByIdAPI(id);
             }
-            else{
-                console.log(result[0]['type'],type);
+            else{                
                 if(result[0]['type']==type){
                     addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);    
                     $(".container").removeAttr("hidden");   
@@ -86,6 +85,7 @@ function searchMovieOrShowByIdAPI(id){
 
                addHTMLDetailMovieShow(result['Title'], result['Awards'], result['Country'], result['Director'],result['Writer'],result['Actors'],result['Genre'],result['Language'],result['Plot'],result['Poster'],result['Rated'],result['Released'],result['Runtime'],result['Type'],result['imdbID']);
                $(".container").removeAttr("hidden");   
+
            }else if(window.location.href.indexOf("search") != -1 ){
 
             addHTMLSearchMovieShow(result['Title'],result['imdbID'],result['Type'],result['Poster']);
