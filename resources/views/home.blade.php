@@ -6,7 +6,7 @@
 <script type="text/javascript" src="{{ asset('js/main/bookSearch.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
 @endsection
-
+@section('tittlePage', 'Home')
 @section('content')
 
 <div class="container">

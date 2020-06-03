@@ -46,7 +46,7 @@
 
             <div class="input-group col-12">
               @if(Request::is('show/*'))
-
+              @section('tittlePage', 'Show')
               <div class="input-group col-12">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default">Season</span>
@@ -62,7 +62,7 @@
               </div>
 
               @endif
-
+              @section('tittlePage', 'Movie')
               <div class="input-group col-12">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default">Timemark</span>
@@ -137,7 +137,13 @@
           </div>
 
           <div class="col-sm-9 col-md-9 col-xs-12 mx-auto mt-5">
-            <div class="card-header">Reviews</div>
+            @if(Request::is('show/*'))
+              <div class="card-header">Reviews <span style="float: right; color: white;"><a style="color: white;" href="{{ url('reviews/'.$idObject.'/show/new') }}">(See all)</a>
+            </span></div>
+            @else
+              <div class="card-header">Reviews <span style="float: right;"><a style="color: white;" href="{{ url('reviews/'.$idObject.'/movie/new') }}">(See all)</a>
+            </span></div>
+            @endif
             <div class="card-body tMovies">
               @if($reviews)              
               @guest

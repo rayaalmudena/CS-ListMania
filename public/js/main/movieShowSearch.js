@@ -18,7 +18,7 @@ function searchMovieOrShowByIdDB (id){
       	
       				
       				addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);
-	   			
+	   			    $(".container").removeAttr("hidden");   
 	   			}else{
 	   				
 	   				//save in home
@@ -34,6 +34,37 @@ function searchMovieOrShowByIdDB (id){
 	});
 }
 
+
+function searchMovieOrShowByIdDB_Type (id, type){
+
+    $.ajax({
+        method: 'GET',
+        url: '/getMovieOrShow/'+id,
+        dataType: 'json',   
+        data:{},
+        success: function(result){
+            //Change data
+            len=Object.keys(result).length;
+            if (len==0){     
+                            
+                //THERE IS NO DATA ON DB Search on API
+                searchMovieOrShowByIdAPI(id);               
+            }
+            else{
+                console.log(result[0]['type'],type);
+                if(result[0]['type']==type){
+                    addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);    
+                    $(".container").removeAttr("hidden");   
+                }else{
+                     window.location.href = "/";
+                }
+            }
+        },
+        error: function (error) {
+           //console.log(error);
+        }
+    });
+}
 
 function searchMovieOrShowByIdAPI(id){
 
@@ -54,7 +85,7 @@ function searchMovieOrShowByIdAPI(id){
         	if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1 || window.location.href.indexOf("book")!= -1) {
       			
       			addHTMLDetailMovieShow(result['Title'], result['Awards'], result['Country'], result['Director'],result['Writer'],result['Actors'],result['Genre'],result['Language'],result['Plot'],result['Poster'],result['Rated'],result['Released'],result['Runtime'],result['Type'],result['imdbID']);
-
+                $(".container").removeAttr("hidden");   
    			}else if(window.location.href.indexOf("search") != -1 ){
 
                 addHTMLSearchMovieShow(result['Title'],result['imdbID'],result['Type'],result['Poster']);
@@ -92,8 +123,7 @@ function searchMovieOrShowByNameAPI(name){
             if (result['Title']) {                
                 searchMovieOrShowByIdDB(result['imdbID']);
                             
-            }
-            
+            }            
 
         },
         error: function(error){

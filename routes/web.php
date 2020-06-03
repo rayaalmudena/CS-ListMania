@@ -33,6 +33,9 @@ Route::post('/saveBookUser', 'SavedObjectsController@saveBookUser');
 Route::post('/likeUser', 'ReviewsController@likeUser');
 //save review
 Route::post('/saveReview/{type}/{id}', 'ReviewsController@saveReview');
+//All reviews
+Route::get('/reviews/{type}/{id}/{order}', 'ReviewsController@indexAllReviews');
+
 
 //Detail objects views
 Route::get('/movie/{id}', 'CachesController@indexMovie')->name('movie');
