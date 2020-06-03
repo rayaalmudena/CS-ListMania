@@ -24,7 +24,7 @@
 
 
 @section('content')
-<div class="container" hidden>
+<div class="container" style="visibility: hidden;">
   <div class="col-12">    
 
     <div class="row">
