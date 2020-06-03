@@ -24,7 +24,7 @@
 @section('tittlePage', 'Book')
 
 @section('content')
-<div class="container " hidden="hidden">
+<div class="container ">
   <div class="col-12"> 
 
     <div class="row">
