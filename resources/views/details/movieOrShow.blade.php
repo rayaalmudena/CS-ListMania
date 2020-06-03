@@ -25,7 +25,7 @@
 
 
 @section('content')
-<div class="container" >
+<div class="container" hidden="hidden">
   <div class="col-12">    
 
     <div class="row">
