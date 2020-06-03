@@ -18,7 +18,7 @@
 	    	<script type="text/javascript" src ="{{ asset('js/listMain.js') }}"></script>
 	    @endif 
 @endguest
-
+@section('tittlePage', $username .' Movies List')
 @endsection
 @section('content')
 <div class="container">
@@ -62,7 +62,7 @@
 	                 @foreach ($all as $allOne)
 	                 	@if(isset($usernameLoggedIn) && $usernameLoggedIn==$username)
 							<tr class="{{ $allOne->api_id}}">						    
-								<td><a href="/movie/{{ $allOne->api_id }}" name="title">{{$allOne->name_object}}</a></td>
+								<td><a href="/book/{{ $allOne->api_id }}" name="title">{{$allOne->name_object}}</a></td>
 								<td><input type="number" value="{{$allOne->bookmark}}" name="bookmark" min="0" step="1"></td>
 								<td><input type="number" value="{{$allOne->line}}" name="line" min="0" step="1"></td>
 								<td class="status" status="{{$allOne->status}}">

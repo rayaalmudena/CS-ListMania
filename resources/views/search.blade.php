@@ -7,9 +7,8 @@
 <script type="text/javascript">
         var searched =" <?php echo $query; ?>";
 </script>
-
 @endsection
-
+@section('tittlePage', 'Search: '.$query)
 @section('content')
 
 <div class="container" searched="{{ $query }}" >    

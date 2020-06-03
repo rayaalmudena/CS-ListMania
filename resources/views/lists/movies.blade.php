@@ -19,7 +19,7 @@
 	    @endif 
 	@endguest
 @endsection
-
+@section('tittlePage', $username .' Movies List')
 @section('content')
 <div class="container">
 	<div class="row justify-content-center">

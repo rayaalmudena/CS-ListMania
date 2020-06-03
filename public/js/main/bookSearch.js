@@ -16,7 +16,7 @@ function searchBookByIdDB (id){
                 if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1 || window.location.href.indexOf("book")!= -1) {
                     
                     addHTMLDetailBook(result[0]['country'], result[0]['api_id'], result[0]['title'], result[0]['authors'], result[0]['genre'], result[0]['plot'], result[0]['image'], result[0]['language'], result[0]['rated'], result[0]['pages'], result[0]['publisher'], result[0]['released']);
-                
+                    $(".container").removeAttr("hidden");   
                 }else{
                     //save in home                 
                     //Change data THERE IS DATA                
@@ -53,11 +53,12 @@ function searchBookByIdAPI (id){
             if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1 || window.location.href.indexOf("book")!= -1) {
                 
                 addHTMLDetailBook(result.accessInfo.country , result.id , result.volumeInfo.title ,JSON.stringify(result.volumeInfo.authors) ,JSON.stringify(result.volumeInfo.categories) ,result.volumeInfo.description, result.volumeInfo.imageLinks.thumbnail ,result.volumeInfo.language ,result.volumeInfo.maturityRating , result.volumeInfo.pageCount ,result.volumeInfo.publisher, result.volumeInfo.publishedDate);
-
+                $(".container").removeAttr("hidden");   
+                
             }else if(window.location.href.indexOf("search") != -1 ){
 
                 addHTMLSearchBook(result.volumeInfo.title,result.id,"book", result.volumeInfo.imageLinks.thumbnail);
-
+                
             }else{
                 //save in home                
                 $(".searchThisB > div#"+id+ "> img").attr("src", result.volumeInfo.imageLinks.thumbnail ).removeAttr("href");

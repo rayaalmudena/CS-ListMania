@@ -2,8 +2,8 @@
 @section('links')
 <link href="{{ asset('css/detailsOb.css') }}" rel="stylesheet">
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
-
 @endsection
+@section('tittlePage', $username .' Profile')
 @section('content')
 <div class="container">
   <div class="col-12"> 

@@ -39,7 +39,7 @@ $( document ).ready(function() {
           }
       }
 
-      $('input[name="timemark"').on('input',function(e){
+      $('input').on('input',function(e){
 
         api_id= $(':focus').closest( "tr" ).attr("class"); 
         name= $(':focus').attr('name');
@@ -53,13 +53,6 @@ $( document ).ready(function() {
           
           api_id= $(':focus').closest( "tr" ).attr("class"); 
           name= $(':focus').attr('name');
-          //alert($(":focus").attr("name"))
-         /** if (api_id === undefined && api_id === undefined){
-            name="timemark";
-            select=($(':focus').closest( "select" ));
-
-            api_id=select.closest( "tr" ).attr("class");
-          }**/
 
           $('.'+api_id+" [name='"+name+"']" ).each(function() {
               $( this ).val($(':focus').val());

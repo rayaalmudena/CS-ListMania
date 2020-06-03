@@ -21,6 +21,7 @@
 @endguest
 @endsection
 
+@section('tittlePage', 'Book')
 
 @section('content')
 <div class="container " hidden="hidden">
@@ -130,7 +131,7 @@
 
 
           <div class="col-sm-9 col-md-9 col-xs-12 mx-auto mt-5">
-            <div class="card-header">Reviews</div>
+            <div class="card-header">Reviews <span style="float: right; color: white;"><a style="color: white;" href="{{ url('reviews/'.$idObject.'/book/new') }}">(See all)</a></span></div>
             <div class="card-body tMovies">
               @if($reviews)              
               @guest

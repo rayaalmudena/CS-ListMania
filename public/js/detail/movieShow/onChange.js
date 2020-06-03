@@ -2,7 +2,7 @@ $( document ).ready(function() {
 		
       if (window.location.href.indexOf("movie") != -1){
 
-        $('#timemark').on('input',function(e){
+        $('input').on('input',function(e){
             var api_id=$(".objectSearch").attr("id");
             var timemark=$("#timemark").val();         
             var rating=$("#rating").val();
@@ -12,6 +12,7 @@ $( document ).ready(function() {
               } else {
                 var fav=1;
               }
+
             saveMovieUser($("#title").text(),api_id,timemark,rating,status,fav);            
           });
 
@@ -27,7 +28,7 @@ $( document ).ready(function() {
             } else {
               var fav=1;
             }
-          
+        
           saveMovieUser($("#title").text(),api_id,timemark,rating,status,fav);
 
       });   
@@ -36,7 +37,7 @@ $( document ).ready(function() {
 
       }else{
 
-      $('#timemark').on('input',function(e){
+      $('input').on('input',function(e){
         
           var api_id=$(".objectSearch").attr("id");
           var timemark=$("#timemark").val();
@@ -49,8 +50,8 @@ $( document ).ready(function() {
             } else {
               var fav=1;            }
 
-             
-            saveMovieUser($("#title").text(),api_id,timemark,rating,status,fav);            
+           
+            saveShowUser($("#title").text(),api_id,timemark,season,episode,rating,status,fav);         
           });
 
         //update database

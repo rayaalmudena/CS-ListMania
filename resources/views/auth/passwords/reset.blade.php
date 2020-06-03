@@ -8,6 +8,7 @@
    background-color: #e28412; color:white;
 }
 @endsection
+@section('tittlePage', 'Reset password')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
