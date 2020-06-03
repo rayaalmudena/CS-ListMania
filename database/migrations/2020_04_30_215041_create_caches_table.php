@@ -27,7 +27,7 @@ class CreateCachesTable extends Migration
             $table->longText('genre')->nullable();
             $table->longText('language')->nullable();
             $table->longText('plot')->nullable();
-            $table->longText('image')->default("https://www.fcmlindia.com/images/fifty-days-campaign/no-image.jpg");
+            $table->longText('image')->nullable();
             $table->longText('rated')->nullable();
             $table->longText('runtime')->nullable();
             $table->longText('released')->nullable();
