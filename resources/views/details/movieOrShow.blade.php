@@ -38,6 +38,11 @@
             <img class="img-responsive img-thumbnail" id="photo" />
 
             @guest
+               @if(Request::is('show/*'))
+                @section('tittlePage', 'Show') 
+              @else
+                @section('tittlePage', 'Movie')
+              @endif
             @else       
             <div class="mt-3 col-12"> 
               <b >Options:</b>
@@ -45,7 +50,7 @@
 
             <div class="input-group col-12">
               @if(Request::is('show/*'))
-              @section('tittlePage', 'Show')
+              @section('tittlePage', 'Show') 
               <div class="input-group col-12">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default">Season</span>

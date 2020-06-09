@@ -12,27 +12,32 @@ function searchMovieOrShowByIdDB (id){
 
             	//THERE IS NO DATA ON DB Search on API
             	searchMovieOrShowByIdAPI(id);
-            }
-            else{
-                if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1) {
-
-                  if (result[0]['type']=="series" && window.location.href.indexOf("show") != -1) {
-                    addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);
-                    $(".containerSpecial").css("visibility", "visible");
-                }else if(result[0]['type']=="movies" && window.location.href.indexOf("movie") != -1){
-                    addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);
-                    $(".containerSpecial").css("visibility", "visible");
-                }else{
-                    window.location.href = "/";
-                }
-
             }else{
-	   				//save in home
-	   				//Change data THERE IS DATA
-                    $(".searchThisMS > div#"+id+ "> img").attr("src", result[0]['image']).removeAttr("href");
-                }
+                
 
-            }
+                if (result[0]['type']=="series" && window.location.href.indexOf("show") != -1) {
+
+                     addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);
+                     $(".containerSpecial").css("visibility", "visible");
+
+                 }else if(result[0]['type']=="movies" && window.location.href.indexOf("movie") != -1){
+
+                   addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);
+                   $(".containerSpecial").css("visibility", "visible");
+
+               }else if( window.location.href.indexOf("") != -1)
+               
+                    //save in home
+                    //Change data THERE IS DATA
+                    $(".searchThisMS > div#"+id+ "> img").attr("src", result[0]['image']).removeAttr("href");
+
+               else{
+                   window.location.href = "/";
+               }
+
+           }
+
+            
         },
         error: function (error) {
 	       //console.log(error);
