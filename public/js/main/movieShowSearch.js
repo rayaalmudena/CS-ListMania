@@ -1,11 +1,11 @@
 function searchMovieOrShowByIdDB (id){
 
     $.ajax({
-       method: 'GET',
-       url: '/getMovieOrShow/'+id,
-       dataType: 'json',	
-       data:{},
-       success: function(result){
+     method: 'GET',
+     url: '/getMovieOrShow/'+id,
+     dataType: 'json',	
+     data:{},
+     success: function(result){
         	//Change data
             len=Object.keys(result).length;
             if (len==0){     
@@ -16,11 +16,17 @@ function searchMovieOrShowByIdDB (id){
             else{
                 if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1) {
 
+                  if (result[0]['type']=="series" && window.location.href.indexOf("show") != -1) {
+                    addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);
+                    $(".containerSpecial").css("visibility", "visible");
+                }else if(result[0]['type']=="movies" && window.location.href.indexOf("movie") != -1){
+                    addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);
+                    $(".containerSpecial").css("visibility", "visible");
+                }else{
+                    window.location.href = "/";
+                }
 
-                  addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);
-                  $(".containerSpecial").css("visibility", "visible");   
-              }else{
-
+            }else{
 	   				//save in home
 	   				//Change data THERE IS DATA
                     $(".searchThisMS > div#"+id+ "> img").attr("src", result[0]['image']).removeAttr("href");
@@ -30,39 +36,8 @@ function searchMovieOrShowByIdDB (id){
         },
         error: function (error) {
 	       //console.log(error);
-      }
-  });
-}
-
-
-function searchMovieOrShowByIdDBType (id, type){
-
-    $.ajax({
-        method: 'GET',
-        url: '/getMovieOrShow/'+id,
-        dataType: 'json',   
-        data:{},
-        success: function(result){
-            //Change data
-            len=Object.keys(result).length;
-            if (len==0){     
-
-                //THERE IS NO DATA ON DB Search on API
-                searchMovieOrShowByIdAPI(id);
-            }
-            else{                
-                if(result[0]['type']==type){
-                    addHTMLDetailMovieShow(result[0]['title'], result[0]['awards'], result[0]['country'], result[0]['director'],result[0]['writer'],result[0]['actors'],result[0]['genre'],result[0]['language'],result[0]['plot'],result[0]['image'],result[0]['rated'],result[0]['released'],result[0]['runtime'],result[0]['type'],result[0]['imdbID']);    
-                    $(".containerSpecial").css("visibility", "visible");   
-                }else{
-                   window.location.href = "/";
-               }
-           }
-       },
-       error: function (error) {
-           //console.log(error);
-       }
-   });
+     }
+ });
 }
 
 function searchMovieOrShowByIdAPI(id){
@@ -83,21 +58,28 @@ function searchMovieOrShowByIdAPI(id){
         	//save detail
         	if (window.location.href.indexOf("movie") != -1 || window.location.href.indexOf("show")!= -1 || window.location.href.indexOf("book")!= -1) {
 
-               addHTMLDetailMovieShow(result['Title'], result['Awards'], result['Country'], result['Director'],result['Writer'],result['Actors'],result['Genre'],result['Language'],result['Plot'],result['Poster'],result['Rated'],result['Released'],result['Runtime'],result['Type'],result['imdbID']);
-               $(".containerSpecial").css("visibility", "visible");   
+               if (result['Type']=="series" && window.location.href.indexOf("show") != -1) {
+                addHTMLDetailMovieShow(result['Title'], result['Awards'], result['Country'], result['Director'],result['Writer'],result['Actors'],result['Genre'],result['Language'],result['Plot'],result['Poster'],result['Rated'],result['Released'],result['Runtime'],result['Type'],result['imdbID']);
+                $(".containerSpecial").css("visibility", "visible");
+            }else if(result['Type']=="movie" && window.location.href.indexOf("movie") != -1){
+                addHTMLDetailMovieShow(result['Title'], result['Awards'], result['Country'], result['Director'],result['Writer'],result['Actors'],result['Genre'],result['Language'],result['Plot'],result['Poster'],result['Rated'],result['Released'],result['Runtime'],result['Type'],result['imdbID']);
+                $(".containerSpecial").css("visibility", "visible");
+            }else{
+                window.location.href = "/";
+            }               
 
-           }else if(window.location.href.indexOf("search") != -1 ){
+        }else if(window.location.href.indexOf("search") != -1 ){
 
             addHTMLSearchMovieShow(result['Title'],result['imdbID'],result['Type'],result['Poster']);
 
         }else{
    				//save in home
    				$(".searchThisMS > div#"+result['imdbID']+ "> img").attr("src", result['image']).removeAttr("href");
-               }
+             }
 
-               saveMovieOrShow(result['Title'], result['Awards'], result['Country'], result['Director'],result['Writer'],result['Actors'],result['Genre'],result['Language'],result['Plot'],result['Poster'],result['Rated'],result['Released'],result['Runtime'],result['Type'],result['imdbID']);
-           },
-           error: function(error){
+             saveMovieOrShow(result['Title'], result['Awards'], result['Country'], result['Director'],result['Writer'],result['Actors'],result['Genre'],result['Language'],result['Plot'],result['Poster'],result['Rated'],result['Released'],result['Runtime'],result['Type'],result['imdbID']);
+         },
+         error: function(error){
         	//console.log(error);
         }
 
@@ -138,33 +120,33 @@ function searchMovieOrShowByNameAPI(name){
 function saveMovieOrShow(Title,Awards,Country,Director,Writer,Actors,Genre,Language,Plot,Poster,Rated,Released,Runtime,Type,imdbID){
 
 	$.ajax({
-       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-       method: 'POST',
-       url: '/saveMovieOrShow',
-       dataType: 'json',
-       data: {
-           '_token': $('input[name=_token]').val(),
-           'Title':Title,
-           'Awards': Awards,
-           'Country': Country,
-           'Director': Director,
-           'Writer': Writer ,
-           'Actors': Actors,
-           'Genre': Genre,
-           'Language': Language,
-           'Plot': Plot,
-           'Poster': Poster,
-           'Rated': Rated,
-           'Released': Released ,
-           'Runtime': Runtime,
-           'Type': Type ,
-           'imdbID': imdbID
-       },	
+     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+     method: 'POST',
+     url: '/saveMovieOrShow',
+     dataType: 'json',
+     data: {
+         '_token': $('input[name=_token]').val(),
+         'Title':Title,
+         'Awards': Awards,
+         'Country': Country,
+         'Director': Director,
+         'Writer': Writer ,
+         'Actors': Actors,
+         'Genre': Genre,
+         'Language': Language,
+         'Plot': Plot,
+         'Poster': Poster,
+         'Rated': Rated,
+         'Released': Released ,
+         'Runtime': Runtime,
+         'Type': Type ,
+         'imdbID': imdbID
+     },	
 
-       error: function (error) {
+     error: function (error) {
 	       // console.log(error);
-      }
-  });    
+     }
+ });    
 
 }
 
