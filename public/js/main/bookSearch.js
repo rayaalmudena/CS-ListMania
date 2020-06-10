@@ -7,7 +7,6 @@ function searchBookByIdDB (id){
         data:{},
         success: function(result){
             //Change data
-
             if (Object.keys(result).length==0){   
                 //THERE IS NO DATA ON DB Search on API
                 searchBookByIdAPI(id);                
@@ -17,21 +16,22 @@ function searchBookByIdDB (id){
 
                     addHTMLDetailBook(result[0]['country'], result[0]['api_id'], result[0]['title'], result[0]['authors'], result[0]['genre'], result[0]['plot'], result[0]['image'], result[0]['language'], result[0]['rated'], result[0]['pages'], result[0]['publisher'], result[0]['released']);
                     $(".containerSpecial").css("visibility", "visible");  
+
+                }else if(window.location.href.indexOf("search") != -1 ){
+
+                    addHTMLSearchBook(result[0]['title'], id,"book", result[0]['image']);
+                 
                 }else{
                     //save in home
                     //Change data THERE IS DATA                
                     $(".searchThisB > div#"+id+ "> img").attr("src", result[0]['image']).removeAttr("href");
-                }
-
-                
+                }                
             }
         },
         error: function (error) {
            // console.log(error);
        }
-
    });
-
 }
 
 function searchBookByIdAPI (id){
@@ -63,10 +63,8 @@ function searchBookByIdAPI (id){
                 //save in home                
                 $(".searchThisB > div#"+id+ "> img").attr("src", result.volumeInfo.imageLinks.thumbnail ).removeAttr("href");
             }
-            
             saveBook( result.accessInfo.country , result.id , result.volumeInfo.title ,JSON.stringify(result.volumeInfo.authors) ,JSON.stringify(result.volumeInfo.categories) ,result.volumeInfo.description, result.volumeInfo.imageLinks.thumbnail ,result.volumeInfo.language ,result.volumeInfo.maturityRating , result.volumeInfo.pageCount ,result.volumeInfo.publisher, result.volumeInfo.publishedDate);
             //console.log(result.accessInfo.country ,result.id ,result.volumeInfo.title ,result.volumeInfo.authors ,result.volumeInfo.categories ,result.volumeInfo.description, thumb ,result.volumeInfo.language ,result.volumeInfo.maturityRating ,result.volumeInfo.pageCount ,result.volumeInfo.publisher ,result.volumeInfo.publishedDate);
-
 
         },
         error: function(error){
