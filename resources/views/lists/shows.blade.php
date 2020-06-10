@@ -26,7 +26,7 @@
         <div class="col-md-10">
      	  
         	@if( isset($usernameLoggedIn) && $usernameLoggedIn==$username)
-				<h3><b>Your</b> movie list</h3>
+				<h3><b>Your</b> show list</h3>
 			@else
 				<h3><b>{{$username}}</b>'s show list</h3>
 			@endif
